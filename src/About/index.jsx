@@ -3,7 +3,9 @@ import React from 'react'
 const Index = () => {
   return (
     <div>
-      <h1>About page</h1>
+      <h1>About page </h1>
+      <h1>Add Functionality page </h1>
+
     </div>
   )
 }
