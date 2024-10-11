@@ -1,4 +1,32 @@
-.App {
+
+.nav-link {
+  color: black !important;
+}
+
+.active {
+  background-color:#52c8e2 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +63,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

@@ -1,20 +1,16 @@
 import './App.css';
 import React, { useState } from 'react';
-import Login from './Login'
+// import Login from './Login'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Layout from './Layout'
+import Landing from './Landing'
 import Home from './Component/Home';
 import Dashboard from './Component/Dashboard';
 import Details from './Component/Details';
-import Setting from './Component/Setting';
+import Profile from './Component/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import StartPage from './StartPage'
 
 function App() {
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-  // const handleLogin = () => {
-  //   setLoggedIn(true);
-  // };
 
   return (
     <BrowserRouter>
@@ -23,19 +19,21 @@ function App() {
           path="/"
           element={
             isLoggedIn ? (
-              <Navigate to="/Layout/Dashboard" />
+              <Navigate to="/Landing/Dashboard" />
             ) : (
               <Login onLogin={handleLogin} />
             )
           }
         /> */}
-        <Route path="/Layout" element={<Layout />}>
-          <Route path="Dashboard" element={<Dashboard />} />
+        <Route path="/" element={<StartPage />} />
+        <Route path="/Landing" element={<Landing />}>
+          <Route path="Dashboard" element={<Dashboard />}>
+            <Route path="Profile" element={<Profile />} />
+          </Route>
           <Route path="Home" element={<Home />} />
           <Route path="Details" element={<Details />} />
-          <Route path="Setting" element={<Setting />} />
         </Route>
-        <Route path="/" element={<Login />} />
+
       </Routes>
     </BrowserRouter>
   );
