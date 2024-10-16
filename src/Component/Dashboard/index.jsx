@@ -24,6 +24,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import { Outlet, useLocation } from 'react-router-dom';
 
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+
 const MyTable = () => {
   const [userData, setUserData] = useState([]);
   const [page, setPage] = useState(0);
@@ -50,7 +52,7 @@ const MyTable = () => {
   }, []);
 
   const getAllEmpDetails = async () => {
-    await axios.get('http://localhost:3005/getRecords/getAllEmp')
+    await axios.get(`${REACT_APP_BASE_URL}/getRecords/getAllEmp`)
       .then(response => {
         setUserData(response.data.data);
         setValue(response.data.data)
@@ -82,7 +84,7 @@ const MyTable = () => {
 
   const handleDelete = async () => {
     const id = localStorage.getItem("editId");
-    await axios.delete(`http://localhost:3005/deleteRecords/${id}/deleteEmpDetails`)
+    await axios.delete(`${REACT_APP_BASE_URL}/deleteRecords/${id}/deleteEmpDetails`)
       .then(res => {
         setUserData(prevData => prevData.filter(user => user._id !== id));
         handleMenuClose();
@@ -174,7 +176,7 @@ const MyTable = () => {
         }
       };
       try {
-        const response = await fetch(`http://localhost:3005/updateRecords/${editId}/updateEmpDetails`, {
+        const response = await fetch(`${REACT_APP_BASE_URL}/updateRecords/${editId}/updateEmpDetails`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -201,7 +203,7 @@ const MyTable = () => {
         }
       };
       try {
-        const response = await fetch('http://localhost:3005/newRecord/newEmpAccount', {
+        const response = await fetch(`${REACT_APP_BASE_URL}/newRecord/newEmpAccount`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -249,7 +251,7 @@ const MyTable = () => {
 
   const sendEmail = async (to, subject, htmlContent,name) => {
     try {
-      await axios.post('http://localhost:3005/sendEmail/email', {
+      await axios.post(`${REACT_APP_BASE_URL}/sendEmail/email`, {
         to: to,
         subject: subject,
         html: htmlContent,
