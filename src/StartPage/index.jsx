@@ -23,6 +23,8 @@ import leader from './leader.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+
 function Index() {
 
 
@@ -75,8 +77,8 @@ function Index() {
             if (!userData.email || !userData.name || !userData.picture) {
                 throw new Error("User data is incomplete.");
             }
-            const response = await axios.post('http://localhost:3005/AuthLogin/googleAuth', userData);
-            console.log(response.data)
+            const response = await axios.post(`${REACT_APP_BASE_URL}/AuthLogin/googleAuth`, userData);
+            // console.log(response.data)
             navigate("/Landing/Dashboard");
         } catch (error) {
             console.error('Error during login', error.response ? error.response.data : error.message);
@@ -123,7 +125,7 @@ function Index() {
         try {
             if (isSignUp) {
                 console.log(firstName, lastName, email, password,)
-                const response = await axios.post('http://localhost:3005/singUp/createAccount', {
+                const response = await axios.post(`${REACT_APP_BASE_URL}/singUp/createAccount`, {
                     firstName,
                     lastName,
                     email,
@@ -132,7 +134,7 @@ function Index() {
                 handleSignUpToggle();
                 console.log('Sign Up Success:', response.data);
             } else {
-                const response = await axios.post('http://localhost:3005/singIn/login', {
+                const response = await axios.post(`${REACT_APP_BASE_URL}/singIn/login`, {
                     email,
                     password,
                 });
@@ -173,7 +175,7 @@ function Index() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3005/AuthEmail/googleAuthEmail', {
+            const response = await axios.post(`${REACT_APP_BASE_URL}/AuthEmail/googleAuthEmail`, {
                 email,
             });
 
@@ -195,6 +197,7 @@ function Index() {
         }
 
     };
+    console.log("process.env.REACT_APP_BASE_URL",process.env.REACT_APP_BASE_URL)
 
     const setPasswordAuth = async () => {
         if (!newPassword.match(prgx)) {
@@ -202,7 +205,7 @@ function Index() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:3005/setAuthPassword/setPassword', {
+            const response = await axios.post(`${REACT_APP_BASE_URL}/setAuthPassword/setPassword`, {
                 email,
                 newPassword,
             });

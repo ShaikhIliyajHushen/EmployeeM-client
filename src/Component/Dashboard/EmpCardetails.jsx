@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Avatar, Grid } from '@mui/material';
 import axios from 'axios';
 
-
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 function EmpCardetails() {
     const [UserData, setUserData] = useState([])
 
@@ -15,7 +15,7 @@ function EmpCardetails() {
     }, []);
 
     const getAllEmpDetails = async () => {
-        await axios.get('http://localhost:3005/getRecords/getAllEmp')
+        await axios.get(`${REACT_APP_BASE_URL}/getRecords/getAllEmp`)
             .then(response => {
                 setUserData(response.data.data);
             })

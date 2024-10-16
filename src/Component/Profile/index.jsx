@@ -281,6 +281,8 @@ import axios from 'axios';
 import UserDialog from '../Dashboard/DialogBox';
 import avatr from '../../Assets/pic.jpg';
 
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+
 const Profile = () => {
   const [openDialog, setDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -322,7 +324,7 @@ const Profile = () => {
         if (TokenData) {
           const decodedToken = jwtDecode(TokenData);
           const { id } = decodedToken;
-          const response = await axios.get(`http://localhost:3005/getSingleEmpRecord/getSingleEmp/${id}`);
+          const response = await axios.get(`${REACT_APP_BASE_URL}/getSingleEmpRecord/getSingleEmp/${id}`);
           setFormData(response.data.data);
           setSelectedUser(response.data.data);
           console.log(response.data.data);
@@ -369,7 +371,7 @@ const Profile = () => {
       }
     };
     try {
-      const response = await fetch(`http://localhost:3005/updateRecords/${id}/updateEmpDetails`, {
+      const response = await fetch(`${REACT_APP_BASE_URL}/updateRecords/${id}/updateEmpDetails`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

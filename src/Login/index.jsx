@@ -17,6 +17,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
+
+
 const Index = () => {
     // const navigate = useNavigate();
     // const { loginWithRedirect, user, isAuthenticated } = useAuth0();
@@ -147,7 +150,7 @@ const Index = () => {
         try {
             if (isSignUp) {
                 console.log(firstName, lastName, email, password,)
-                const response = await axios.post('http://localhost:3005/singUp/createAccount', {
+                const response = await axios.post(`${REACT_APP_BASE_URL}/singUp/createAccount`, {
                     firstName,
                     lastName,
                     email,
@@ -156,7 +159,7 @@ const Index = () => {
                 handleSignUpToggle();
                 console.log('Sign Up Success:', response.data);
             } else {
-                const response = await axios.post('http://localhost:3005/singIn/login', {
+                const response = await axios.post(`${REACT_APP_BASE_URL}/singIn/login`, {
                     email,
                     password,
                 });
